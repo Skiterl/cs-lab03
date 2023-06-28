@@ -1,7 +1,6 @@
-#include "../histogram.h"
-
 #include <cassert>
 #include <ranges>
+#include "../histogram_svg.h"
 
 void test_positive() {
 	double arr[3]{ 1, 2, 3 };
@@ -35,6 +34,20 @@ void test_one() {
 	assert(max == 1);
 }
 
+void test_check_color() {
+	std::string color_white = "#FFF";
+	std::string color_blue = "blue";
+	std::string no_color = "no color";
+	assert(check_color(color_blue));
+	assert(check_color(color_white));
+	assert(!check_color(no_color));
+}
+
+
 int main() {
 	test_positive();
+	test_negative();
+	test_equals();
+	test_one();
+	test_check_color();
 }

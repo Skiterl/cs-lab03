@@ -62,15 +62,6 @@ void draw_histogram(std::vector<size_t> bins) {
         });
 }
 
-
-bool check_color(std::string& color) {
-    if (color.find('#') == 0 || !(color.find(' ') != std::string::npos)) {
-        color.erase(0, 1);
-        return true;
-    }
-    return false;
-}
-
 std::vector<std::string> input_colors(size_t colors_count) {
     std::vector<std::string> colors;
     std::string current_color;

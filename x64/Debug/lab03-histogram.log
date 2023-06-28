@@ -1,4 +1,5 @@
-﻿  histogram_svg.cpp
+﻿  histogram.cpp
+  histogram_svg.cpp
 C:\Users\aizharkov\Desktop\lab03\lab03-histogram\histogram_svg.cpp(41,26): warning C4244: 'initializing': conversion from 'size_t' to 'double', possible loss of data
   lab03-histogram.cpp
 C:\Users\aizharkov\Desktop\lab03\lab03-histogram\lab03-histogram.cpp(56,41): warning C4244: '=': conversion from 'double' to 'size_t', possible loss of data
@@ -10,4 +11,4 @@ C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.3253
 C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\include\xutility(636,8): message : see reference to variable template 'bool invocable<`draw_histogram'::`2'::<lambda_1> &,unsigned __int64 &>' being compiled
 C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\include\algorithm(300,13): message : see reference to variable template 'bool indirectly_unary_invocable<`draw_histogram'::`2'::<lambda_1>,std::projected<std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned __int64> > >,std::identity> >' being compiled
   Generating Code...
-  lab03-histogram.vcxproj -> C:\Users\aizharkov\Desktop\lab03\lab03-histogram\x64\Debug\lab03-histogram.exe
+LINK : fatal error LNK1168: cannot open C:\Users\aizharkov\Desktop\lab03\lab03-histogram\x64\Debug\lab03-histogram.exe for writing
