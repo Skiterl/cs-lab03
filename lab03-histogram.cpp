@@ -5,6 +5,7 @@
 #include <iomanip>
 #include <string>
 #include <fstream>
+#include "histogram.h"
 
 void generate_numbers() {
     size_t number_count = rand() % 999 + 1;
@@ -19,14 +20,6 @@ void generate_numbers() {
     }
 
     out << "\n" << rand() % 9 + 1;
-}
-
-std::vector<double> input_numbers(size_t number_count) {
-    std::vector<double> numbers(number_count);
-    for (auto& elem : numbers) {
-        std::cin >> elem;
-    }
-    return numbers;
 }
 
 std::vector<size_t> make_histogram(std::vector<double> numbers, size_t bin_count) {
