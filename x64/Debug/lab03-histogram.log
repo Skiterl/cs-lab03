@@ -1,0 +1,11 @@
+﻿  lab03-histogram.cpp
+C:\Users\aizharkov\Desktop\lab03\lab03-histogram\lab03-histogram.cpp(62,41): warning C4244: '=': conversion from 'double' to 'size_t', possible loss of data
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\include\type_traits(1484): message : see reference to function template instantiation 'auto draw_histogram::<lambda_1>::operator ()<unsigned __int64>(const _T1 &) const' being compiled
+          with
+          [
+              _T1=unsigned __int64
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\include\xutility(636,8): message : see reference to variable template 'bool invocable<`draw_histogram'::`2'::<lambda_1> &,unsigned __int64 &>' being compiled
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\include\algorithm(300,13): message : see reference to variable template 'bool indirectly_unary_invocable<`draw_histogram'::`2'::<lambda_1>,std::projected<std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned __int64> > >,std::identity> >' being compiled
+C:\Users\aizharkov\Desktop\lab03\lab03-histogram\lab03-histogram.cpp(109,26): warning C4244: 'initializing': conversion from 'size_t' to 'double', possible loss of data
+  lab03-histogram.vcxproj -> C:\Users\aizharkov\Desktop\lab03\lab03-histogram\x64\Debug\lab03-histogram.exe
