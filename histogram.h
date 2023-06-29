@@ -4,6 +4,6 @@
 #include <vector>
 #include <iostream>
 
-std::vector<double> input_numbers(size_t number_count);
+std::vector<double> input_numbers(std::istream&, size_t);
 
 #endif

@@ -1,2 +1,3 @@
-﻿  lab03-test.cpp
+﻿  histogram_svg.cpp
+C:\Users\aizharkov\Desktop\lab03\lab03-histogram\histogram_svg.cpp(41,26): warning C4244: 'initializing': conversion from 'size_t' to 'double', possible loss of data
   lab03-test.vcxproj -> C:\Users\aizharkov\Desktop\lab03\lab03-histogram\x64\Debug\lab03-test.exe

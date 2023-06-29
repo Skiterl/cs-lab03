@@ -1,5 +1,6 @@
 #include <cassert>
 #include <ranges>
+
 #include "../histogram_svg.h"
 
 void test_positive() {

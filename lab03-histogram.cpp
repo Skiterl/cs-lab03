@@ -80,7 +80,7 @@ int main()
     size_t number_count;
     size_t bin_count;
     std::cin >> number_count;
-    auto numbers = input_numbers(number_count);
+    auto numbers = input_numbers(std::cin, number_count);
     std::cin >> bin_count;
 
     auto bins = make_histogram(numbers, bin_count);

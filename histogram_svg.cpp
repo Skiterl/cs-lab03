@@ -49,3 +49,10 @@ void show_histogram_svg(const std::vector<size_t>& bins, std::vector<std::string
     }
     svg_end();
 }
+
+bool check_color(std::string& color) {
+    if (color.find('#') == 0 || !(color.find(' ') != std::string::npos)) {
+        return true;
+    }
+    return false;
+}

@@ -7,12 +7,7 @@
 
 using namespace std;
 
-bool check_color(std::string& color) {
-    if (color.find('#') == 0 || !(color.find(' ') != std::string::npos)) {
-        return true;
-    }
-    return false;
-}
+bool check_color(string&);
 void svg_begin(double width, double height);
 void svg_text(double left, double baseline, std::string text);
 void svg_end();
