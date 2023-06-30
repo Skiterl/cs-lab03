@@ -39,8 +39,8 @@ void show_histogram_svg(const std::vector<size_t>& bins, std::vector<std::string
     size_t color_index = 0;
     for (size_t bin : bins) {
         double bin_width = bin;
-        if (max > 40) {
-            bin_width = BLOCK_WIDTH * 40 * bin_width / max;
+        if (max > 35) {
+            bin_width = BLOCK_WIDTH * 35 * bin_width / max;
         }
         svg_text(TEXT_LEFT, top + TEXT_BASELINE, std::to_string(bin));
         svg_rect(TEXT_WIDTH, top, bin_width, BIN_HEIGHT, colors[color_index], colors[color_index]);

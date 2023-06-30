@@ -8,6 +8,9 @@
 #include "histogram.h"
 #include "histogram_svg.h"
 
+#define CURL_STATICLIB
+#include <curl/curl.h>
+
 void generate_numbers() {
     size_t number_count = rand() % 999 + 1;
     std::vector<double> numbers(number_count);
@@ -75,8 +78,14 @@ std::vector<std::string> input_colors(size_t colors_count) {
     return colors;
 }
 
-int main()
+int main(int argc, char* argv[])
 {
+    if (argc > 1) {
+        for (int i = 0;i < argc;i++) {
+            std::cout << "argv[" << i << "] = " << argv[i] << "\n";
+        }
+    }
+    return 0;
     size_t number_count;
     size_t bin_count;
     std::cin >> number_count;

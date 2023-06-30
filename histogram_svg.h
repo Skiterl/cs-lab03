@@ -5,9 +5,7 @@
 #include <iostream>
 #include <string>
 
-using namespace std;
-
-bool check_color(string&);
+bool check_color(std::string&);
 void svg_begin(double width, double height);
 void svg_text(double left, double baseline, std::string text);
 void svg_end();
