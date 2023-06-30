@@ -97,20 +97,35 @@ std::vector<std::string> input_colors(size_t colors_count) {
     return colors;
 }
 
+Input download(const std::string& address) {
+    std::stringstream buffer;
+
+    CURL* curl = curl_easy_init();
+    if (curl) {
+        CURLcode res;
+        curl_easy_setopt(curl, CURLOPT_URL, address);
+        res = curl_easy_perform(curl);
+        if (res != CURLE_OK) {
+            std::cout << "curl_easy_perform() failed" << "\n";
+            exit(1);
+        }
+        curl_easy_cleanup(curl);
+    }
+
+    return read_input(buffer, false);
+}
+
 
 int main(int argc, char* argv[])
 {
+    Input input;
     if (argc > 1) {
-        CURL* curl = curl_easy_init();
-        if (curl) {
-            CURLcode res;
-            curl_easy_setopt(curl, CURLOPT_URL, argv[1]);
-            res = curl_easy_perform(curl);
-            curl_easy_cleanup(curl);
-        }
-        return 0;
+        input = download(argv[1]);
     }
-    const auto input = read_input(std::cin, false);
+    else {
+        input = read_input(std::cin, true);
+    }
+
     auto bins = make_histogram(input);
     auto colors = input_colors(input.bin_count);
 
