@@ -1,4 +1,5 @@
 #include "histogram_svg.h"
+#include "histogram.h"
 
 void svg_begin(double width, double height) {
     std::cout << "<?xml version='1.0' encoding='UTF-8'?>\n";
@@ -22,7 +23,7 @@ void svg_rect(double x, double y, double width, double height,
         << stroke << "' fill = '" << fill << "'/>";
 }
 
-void show_histogram_svg(const std::vector<size_t>& bins, std::vector<std::string> colors) {
+void show_histogram_svg(const std::vector<size_t>& bins, Input input) {
     const auto IMAGE_WIDTH = 400;
     const auto IMAGE_HEIGHT = 300;
     const auto TEXT_LEFT = 20;
@@ -43,7 +44,7 @@ void show_histogram_svg(const std::vector<size_t>& bins, std::vector<std::string
             bin_width = BLOCK_WIDTH * 35 * bin_width / max;
         }
         svg_text(TEXT_LEFT, top + TEXT_BASELINE, std::to_string(bin));
-        svg_rect(TEXT_WIDTH, top, bin_width, BIN_HEIGHT, colors[color_index], colors[color_index]);
+        svg_rect(TEXT_WIDTH, top, bin_width, BIN_HEIGHT, input.colors[color_index], input.colors[color_index]);
         top += BIN_HEIGHT;
         color_index++;
     }

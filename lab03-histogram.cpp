@@ -12,6 +12,8 @@
 #define CURL_STATICLIB
 #include <curl/curl.h>
 
+std::vector<std::string> input_colors(std::istream&, size_t);
+
 Input read_input(std::istream& in, bool prompt) {
     Input data;
     if(prompt)
@@ -26,6 +28,8 @@ Input read_input(std::istream& in, bool prompt) {
     if (prompt)
         std::cerr << "Enter bin count";
     in >> data.bin_count;
+
+    data.colors = input_colors(in, data.bin_count);
 
     return data;
 }
@@ -84,11 +88,11 @@ void draw_histogram(std::vector<size_t> bins) {
         });
 }
 
-std::vector<std::string> input_colors(size_t colors_count) {
+std::vector<std::string> input_colors(std::istream& in, size_t colors_count) {
     std::vector<std::string> colors;
     std::string current_color;
     for (size_t i = 0; i < colors_count; i++) {
-        std::cin >> current_color;
+        in >> current_color;
         if (check_color(current_color)) {
             colors.push_back(current_color);
         }
@@ -97,16 +101,28 @@ std::vector<std::string> input_colors(size_t colors_count) {
     return colors;
 }
 
+size_t write_data(void* items, size_t item_size, size_t item_count, void* ctx) {
+    auto data_size = item_size * item_count;
+
+    std::stringstream* buffer = reinterpret_cast<std::stringstream*>(ctx);
+
+    buffer->write(reinterpret_cast<const char*>(items), data_size);
+    
+    return data_size;
+}
+
 Input download(const std::string& address) {
     std::stringstream buffer;
 
     CURL* curl = curl_easy_init();
     if (curl) {
         CURLcode res;
-        curl_easy_setopt(curl, CURLOPT_URL, address);
+        curl_easy_setopt(curl, CURLOPT_URL, address.c_str());
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
+        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &buffer);
         res = curl_easy_perform(curl);
         if (res != CURLE_OK) {
-            std::cout << "curl_easy_perform() failed" << "\n";
+            std::cout << "curl_easy_perform() failed"  << "\n";
             exit(1);
         }
         curl_easy_cleanup(curl);
@@ -127,8 +143,7 @@ int main(int argc, char* argv[])
     }
 
     auto bins = make_histogram(input);
-    auto colors = input_colors(input.bin_count);
 
     //draw_histogram(bins);
-    show_histogram_svg(bins, colors);
+    show_histogram_svg(bins, input);
 }

@@ -7,6 +7,7 @@
 struct Input {
     std::vector<double> numbers;
     size_t bin_count;
+    std::vector<std::string> colors;
 };
 
 std::vector<double> input_numbers(std::istream&, size_t);

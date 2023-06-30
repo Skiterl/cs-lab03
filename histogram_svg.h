@@ -4,6 +4,7 @@
 #include <vector>
 #include <iostream>
 #include <string>
+#include "histogram.h"
 
 bool check_color(std::string&);
 void svg_begin(double width, double height);
@@ -11,5 +12,5 @@ void svg_text(double left, double baseline, std::string text);
 void svg_end();
 void svg_rect(double x, double y, double width, double height,
     std::string stroke, std::string fill);
-void show_histogram_svg(const std::vector<size_t>& bins, std::vector<std::string> colors);
+void show_histogram_svg(const std::vector<size_t>&, Input input);
 #endif
