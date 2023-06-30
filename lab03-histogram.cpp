@@ -12,13 +12,19 @@
 #define CURL_STATICLIB
 #include <curl/curl.h>
 
-Input read_input(std::istream& in) {
+Input read_input(std::istream& in, bool prompt) {
     Input data;
+    if(prompt)
+        std::cerr << "Enter number count";
 
     size_t number_count;
     in >> number_count;
+    if (prompt)
+        std::cerr << "Enter numbers";
     data.numbers = input_numbers(in, number_count);
     
+    if (prompt)
+        std::cerr << "Enter bin count";
     in >> data.bin_count;
 
     return data;
@@ -99,8 +105,7 @@ int main(int argc, char* argv[])
         
         return 0;
     }
-    const auto input = read_input(std::cin);
-
+    const auto input = read_input(std::cin, false);
     auto bins = make_histogram(input);
     auto colors = input_colors(input.bin_count);
 
