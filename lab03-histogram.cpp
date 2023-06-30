@@ -4,12 +4,30 @@
 #include <algorithm>
 #include <iomanip>
 #include <string>
+#include <sstream>
 #include <fstream>
 #include "histogram.h"
 #include "histogram_svg.h"
 
 #define CURL_STATICLIB
 #include <curl/curl.h>
+
+struct Input {
+    std::vector<double> numbers;
+    size_t bin_count;
+};
+
+Input read_input(std::istream& in) {
+    Input data;
+
+    size_t number_count;
+    in >> number_count;
+    data.numbers = input_numbers(in, number_count);
+    
+    in >> data.bin_count;
+
+    return data;
+}
 
 void generate_numbers() {
     size_t number_count = rand() % 999 + 1;
@@ -78,22 +96,18 @@ std::vector<std::string> input_colors(size_t colors_count) {
     return colors;
 }
 
+
 int main(int argc, char* argv[])
 {
     if (argc > 1) {
-        for (int i = 0;i < argc;i++) {
-            std::cout << "argv[" << i << "] = " << argv[i] << "\n";
-        }
+        CURL* curl = curl_easy_init();
+        
+        return 0;
     }
-    return 0;
-    size_t number_count;
-    size_t bin_count;
-    std::cin >> number_count;
-    auto numbers = input_numbers(std::cin, number_count);
-    std::cin >> bin_count;
+    const auto input = read_input(std::cin);
 
-    auto bins = make_histogram(numbers, bin_count);
-    auto colors = input_colors(bin_count);
+    auto bins = make_histogram(input.numbers, input.bin_count);
+    auto colors = input_colors(input.bin_count);
 
     //draw_histogram(bins);
     show_histogram_svg(bins, colors);
