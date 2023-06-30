@@ -12,11 +12,6 @@
 #define CURL_STATICLIB
 #include <curl/curl.h>
 
-struct Input {
-    std::vector<double> numbers;
-    size_t bin_count;
-};
-
 Input read_input(std::istream& in) {
     Input data;
 
@@ -44,14 +39,14 @@ void generate_numbers() {
     out << "\n" << rand() % 9 + 1;
 }
 
-std::vector<size_t> make_histogram(std::vector<double> numbers, size_t bin_count) {
-    auto min = *std::ranges::min_element(numbers);
-    auto max = *std::ranges::max_element(numbers);
+std::vector<size_t> make_histogram(Input input) {
+    auto min = *std::ranges::min_element(input.numbers);
+    auto max = *std::ranges::max_element(input.numbers);
 
-    double bin_size = (max - min) / bin_count;
-    std::vector<size_t> bins(bin_count);
+    double bin_size = (max - min) / input.bin_count;
+    std::vector<size_t> bins(input.bin_count);
 
-    std::ranges::for_each(std::as_const(numbers), [&](const auto& number) {
+    std::ranges::for_each(std::as_const(input.numbers), [&](const auto& number) {
         auto lb = min, hb = min + bin_size;
         bool found = false;
         std::ranges::for_each(bins, [&](size_t& count) {
@@ -63,7 +58,7 @@ std::vector<size_t> make_histogram(std::vector<double> numbers, size_t bin_count
             hb += bin_size;
             });
         if (!found) {
-            bins[bin_count - 1]++;
+            bins[input.bin_count - 1]++;
         }
         });
     return bins;
@@ -106,7 +101,7 @@ int main(int argc, char* argv[])
     }
     const auto input = read_input(std::cin);
 
-    auto bins = make_histogram(input.numbers, input.bin_count);
+    auto bins = make_histogram(input);
     auto colors = input_colors(input.bin_count);
 
     //draw_histogram(bins);

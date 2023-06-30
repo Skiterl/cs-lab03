@@ -4,6 +4,11 @@
 #include <vector>
 #include <iostream>
 
+struct Input {
+    std::vector<double> numbers;
+    size_t bin_count;
+};
+
 std::vector<double> input_numbers(std::istream&, size_t);
 
 #endif
