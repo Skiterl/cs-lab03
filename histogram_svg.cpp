@@ -24,7 +24,7 @@ void svg_rect(double x, double y, double width, double height,
 }
 
 void show_histogram_svg(const std::vector<size_t>& bins, Input input) {
-    const auto IMAGE_WIDTH = 400;
+    const auto IMAGE_WIDTH = 440;
     const auto IMAGE_HEIGHT = 300;
     const auto TEXT_LEFT = 20;
     const auto TEXT_BASELINE = 20;
@@ -48,6 +48,8 @@ void show_histogram_svg(const std::vector<size_t>& bins, Input input) {
         top += BIN_HEIGHT;
         color_index++;
     }
+    svg_text(TEXT_LEFT, top + TEXT_BASELINE, "Time to connect: " + std::to_string(input.time_to_connect));
+    top += BIN_HEIGHT;
     svg_end();
 }
 

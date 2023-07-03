@@ -14,7 +14,7 @@
 
 std::vector<std::string> input_colors(std::istream&, size_t);
 
-Input read_input(std::istream& in, bool prompt) {
+Input read_input(std::istream& in, bool prompt, double time_to_connect = 0) {
     Input data;
     if(prompt)
         std::cerr << "Enter number count";
@@ -30,7 +30,7 @@ Input read_input(std::istream& in, bool prompt) {
     in >> data.bin_count;
 
     data.colors = input_colors(in, data.bin_count);
-
+    data.time_to_connect = time_to_connect;
     return data;
 }
 
@@ -114,7 +114,9 @@ size_t write_data(void* items, size_t item_size, size_t item_count, void* ctx) {
 Input download(const std::string& address) {
     std::stringstream buffer;
 
+
     CURL* curl = curl_easy_init();
+    double connect = 0;
     if (curl) {
         CURLcode res;
         curl_easy_setopt(curl, CURLOPT_URL, address.c_str());
@@ -125,10 +127,12 @@ Input download(const std::string& address) {
             std::cout << "curl_easy_perform() failed"  << "\n";
             exit(1);
         }
+        res = curl_easy_getinfo(curl, CURLINFO_CONNECT_TIME, &connect);
+        std::cerr << connect << "\n";
         curl_easy_cleanup(curl);
     }
 
-    return read_input(buffer, false);
+    return read_input(buffer, false, connect);
 }
 
 
